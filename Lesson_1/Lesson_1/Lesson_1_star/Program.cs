@@ -13,6 +13,9 @@ namespace Lesson_1_star
     {
         static void Main(string[] args)
         {
+            //Вывод на консоль Игра FizzBuzz
+            Console.WriteLine("Игра FizzBuzz");
+
             //перебор всех цифр от 1 до 100
             for (int i = 1; i <= 100; i++) 
             {
