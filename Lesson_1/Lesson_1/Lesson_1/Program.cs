@@ -13,7 +13,10 @@ namespace Lesson_1
     {
         static void Main(string[] args)
         {
-            
+            //вывели на консоль подсказку, что нужно ввести имя пользователя для приветствия
+            Console.WriteLine("Введите имя пользователя");
+            //создали переменную и в нее сохранили имя пользователя
+            var userName = Console.ReadLine();
         }
     }
 }
