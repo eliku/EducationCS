@@ -21,6 +21,8 @@ namespace Lesson_1
             var data = DateTime.Now.ToShortDateString();
             //выводим сообщение «Привет, %имя пользователя%, сегодня %дата%».
             Console.WriteLine($"\"Привет, {userName}, сегодня {data}.\"");
+            //что консоль не закрывалась сразу, если запустить .exe
+            Console.ReadLine();
         }
     }
 }
