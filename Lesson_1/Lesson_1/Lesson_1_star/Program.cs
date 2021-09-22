@@ -6,7 +6,10 @@ namespace Lesson_1_star
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            for (int i = 0; i <= 100; i++) 
+            { 
+                
+            }
         }
     }
 }
