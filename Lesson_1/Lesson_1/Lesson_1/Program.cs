@@ -20,7 +20,7 @@ namespace Lesson_1
             //создали переменную только с датой без времени
             var data = DateTime.Now.ToShortDateString();
             //выводим сообщение «Привет, %имя пользователя%, сегодня %дата%».
-            Console.WriteLine($"Привет, {userName}, сегодня {data}.");
+            Console.WriteLine($"\"Привет, {userName}, сегодня {data}.\"");
         }
     }
 }
