@@ -17,6 +17,10 @@ namespace Lesson_1
             Console.WriteLine("Введите имя пользователя");
             //создали переменную и в нее сохранили имя пользователя
             var userName = Console.ReadLine();
+            //создали переменную только с датой без времени
+            var data = DateTime.Now.ToShortDateString();
+            //выводим сообщение «Привет, %имя пользователя%, сегодня %дата%».
+            Console.WriteLine($"Привет, {userName}, сегодня {data}.");
         }
     }
 }
