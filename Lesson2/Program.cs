@@ -19,7 +19,7 @@ namespace Lesson2
             //Запрашиваем у пользователя минимальную температуру за сутки
             Console.WriteLine("Введите минимальную температуру за сутки");
             //Присваиваем переменной
-            
+            TemperatureMin = Convert.ToInt32(Console.ReadLine());
         }
     }
 }
