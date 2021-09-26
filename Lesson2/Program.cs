@@ -13,7 +13,7 @@ namespace Lesson2
         static void Main(string[] args)
         {
             //Блок переменных глобальных
-            int TemperatureMin, TemperatureMax, MonthNumber;
+            int TemperatureMin, TemperatureMax, MonthNumber, UserNumber;
             float TemperatureAve; 
 
             //-----------------Первое задание----------------------------------------
@@ -57,6 +57,13 @@ namespace Lesson2
                     Console.WriteLine("Не верный номер месяца.");
                     break;
             }
+            //---------------Третье задание--------------------------------------
+            //Запрашиваем у пользователя число
+            Console.WriteLine("Введите число");
+            //Присваиваем переменной
+            UserNumber = Convert.ToInt32(Console.ReadLine());
+            if ((UserNumber%2)==0) Console.WriteLine($"Введеное число {UserNumber} является четным.");
+            else                   Console.WriteLine($"Введеное число {UserNumber} является нечетным.");
 
         }
     }
