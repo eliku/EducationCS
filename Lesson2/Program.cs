@@ -13,13 +13,24 @@ namespace Lesson2
         static void Main(string[] args)
         {
             //Блок переменных глобальных
-            int TemperatureMin, TemperatureMax, TemperatureAve;           
+            int TemperatureMin, TemperatureMax;
+            float TemperatureAve; 
 
 
             //Запрашиваем у пользователя минимальную температуру за сутки
             Console.WriteLine("Введите минимальную температуру за сутки");
             //Присваиваем переменной
             TemperatureMin = Convert.ToInt32(Console.ReadLine());
+
+            //Запрашиваем у пользователя максимальную температуру за сутки
+            Console.WriteLine("Введите максимальную температуру за сутки");
+            //Присваиваем переменной
+            TemperatureMax = Convert.ToInt32(Console.ReadLine());
+
+            TemperatureAve = (float)(TemperatureMin + TemperatureMax) / 2;
+
+            Console.WriteLine($"Среднесуточная температура за сутки {TemperatureAve}."); ;
+
         }
     }
 }
