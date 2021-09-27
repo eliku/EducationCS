@@ -1,5 +1,8 @@
 ﻿using System;
-
+/*
+ * Домашнее задание
+ * Перевести римское число в арабское.
+ */
 namespace Lesson2_7_task
 {
     class Program
@@ -9,16 +12,26 @@ namespace Lesson2_7_task
             //блок переменных
             string Str;
             int result = 0;
+            int j;
 
             //локальная функция нахождения повторяющихся символов
             int FindRepeatChar(char AChar, int AValue)
             {
-                for (int i = 0; i < Str.Length; i++)
+                for (int i = 0; i < Str.Length-4; i++)
                 {
                     if (Str[i] == AChar && Str[i + 1] == AChar)
                     {
-                        if (Str[i + 2] == AChar) { result += 3 * AValue; Str = Str.Remove(i, 3); return result; }
-                        else { result += 2 * AValue; Str = Str.Remove(i, 2); return result; }
+                        if (Str[i + 2] == AChar) 
+                        { 
+                            result += 3 * AValue; 
+                            Str = Str.Remove(i, 3); 
+                            return result; 
+                        }
+                        else { 
+                            result += 2 * AValue; 
+                            Str = Str.Remove(i, 2); 
+                            return result; 
+                        }
                     }
                 }
                 return result;
@@ -37,7 +50,8 @@ namespace Lesson2_7_task
             //Повтор римской цифры I
             FindRepeatChar('I', 1);
 
-            int[] Array = new int[Str.Length];
+            //Перевод в арабские цифры 
+            int[] Array = new int[Str.Length+1];
             for (int i = 0; i < Str.Length; i++)
             {
                 switch (Str[i])
@@ -69,11 +83,28 @@ namespace Lesson2_7_task
                 }
             }
 
-            for (int i = 0; i < Str.Length; i++)
+            for (j = 0; j < Array.Length - 1; j += 2)
             {
-                Console.Write(Str[i]);
+                if (Array[j] > Array[j + 1]) 
+                { 
+                    result += Array[j] + Array[j + 1];
+                    Array[j] = Array[j + 1] = 0;
+                }
             }
-            Console.WriteLine(result);
+
+            for (j = 0; j < Array.Length - 1; j+=2)
+            {
+                if ((Array[j] < Array[j + 1]) && 
+                    (Array[j]==1 || Array[j] == 5 || Array[j]==10 || Array[j] == 100 || Array[j] == 1000))
+                {
+                    result += Array[j + 1] - Array[j];
+                    Array[j] = Array[j + 1] = 0;
+                }
+            }
+
+            
+            for (j = 0; j < Array.Length - 1; j++) result += Array[j];
+            Console.WriteLine("Перевод в арабское представление: " + result);
         }
     }
 }
