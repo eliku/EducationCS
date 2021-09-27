@@ -16,6 +16,18 @@ namespace Lesson2_4_task
     {
         static void Main(string[] args)
         {
+            string Product, NameShop;
+            int NumProduct, Price;
+            //ввод параметров
+            Console.WriteLine("Введите наименование магазина");
+            NameShop = Console.ReadLine();
+            Console.WriteLine("Введите наименование продукта");
+            Product = Console.ReadLine();
+            Console.WriteLine($"Количество {Product}");
+            NumProduct = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Цена");
+            Price = Convert.ToInt32(Console.ReadLine());
+
             Console.WriteLine("**********************************");
             Console.WriteLine("      НИЗКИЕ ЦЕНЫ КАЖДЫЙ ДЕНЬ    *");
             Console.WriteLine("**********************************");
@@ -24,6 +36,9 @@ namespace Lesson2_4_task
             Console.WriteLine("*         ИНН 1122334455         *");
             Console.WriteLine("**********************************");
             Console.WriteLine("ПРОДАЖА                #0123/00543");
+            Console.WriteLine("                                  ");
+            Console.WriteLine("Шрифт коссаовый \"Леруа Мерлен\"  ");
+            Console.WriteLine("");
         }
     }
 }
