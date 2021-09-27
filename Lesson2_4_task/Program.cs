@@ -31,14 +31,23 @@ namespace Lesson2_4_task
             Console.WriteLine("**********************************");
             Console.WriteLine("      НИЗКИЕ ЦЕНЫ КАЖДЫЙ ДЕНЬ    *");
             Console.WriteLine("**********************************");
-            Console.WriteLine("*   ООО \"Леруа Мерлен Восток\"  *");
+            Console.WriteLine($"*    ООО \"{NameShop}\"         *");
             Console.WriteLine("*         111111, г.Самара       *");
             Console.WriteLine("*         ИНН 1122334455         *");
             Console.WriteLine("**********************************");
             Console.WriteLine("ПРОДАЖА                #0123/00543");
             Console.WriteLine("                                  ");
-            Console.WriteLine("Шрифт коссаовый \"Леруа Мерлен\"  ");
-            Console.WriteLine("");
+            Console.WriteLine($"Шрифт коссаовый \"{NameShop}\"   ");
+            Console.WriteLine($"{NameShop}               {Price} * {NumProduct} шт.   {Price * NumProduct}");
+            Console.WriteLine($"ИТОГ:                    {Price * NumProduct}");
+            Console.WriteLine($"Наличные                 {Price * NumProduct}");
+            Console.WriteLine("СДАЧА                         0.00");
+            Console.WriteLine("***********************************");
+            Console.WriteLine("********СПасибо за покупку!********");
+            Console.WriteLine("Ждем Вас каждый день с 8-00 до 22-00");
+            Console.WriteLine("************************************");
+            Console.WriteLine("********ЯВЛЯЕТСЯ ТОВАРНЫМ ЧЕКОМ******");
+
         }
     }
 }
