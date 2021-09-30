@@ -35,7 +35,7 @@ namespace Lesson3
             {
                 for (int j = 0; j < SizeArray; j++)
                 {
-                    Console.WriteLine($"{new string(' ', Cnt)} {Diagonal_Array[i, j]}");
+                    Console.WriteLine($"{new string(' ', Cnt)}{Diagonal_Array[i, j]}");
                     Cnt++;
                 }
             }
