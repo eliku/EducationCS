@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
+ * Домашнее задание
+ * Написать программу, выводящую элементы двумерного массива по диагонали.
+ */
 namespace Lesson3
 {
     class Program
