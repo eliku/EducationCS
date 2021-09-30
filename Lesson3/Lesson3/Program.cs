@@ -12,6 +12,8 @@ namespace Lesson3
         {
             //блок переменных
             int SizeArray;
+            int Cnt;
+
             Console.WriteLine("Введите размерность массива");
             SizeArray =Convert.ToInt32(Console.ReadLine());
             int[,] Diagonal_Array = new int[SizeArray , SizeArray];
@@ -24,6 +26,17 @@ namespace Lesson3
                     Diagonal_Array[i, j] = Convert.ToInt32(Console.ReadLine());
                 }
             }
+            //вывод массива по диагонали
+            Cnt = 0;
+            for (int i = 0; i < SizeArray; i++)
+            {
+                for (int j = 0; j < SizeArray; j++)
+                {
+                    Console.WriteLine($"{new string(' ', Cnt)} {Diagonal_Array[i, j]}");
+                    Cnt++;
+                }
+            }
+            Console.ReadLine();
         }
     }
 }
