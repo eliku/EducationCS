@@ -10,9 +10,8 @@ namespace Lesson3_3
     {
         static void Main(string[] args)
         {
-            string Str;
             Console.WriteLine("Введите строку.");
-            Str = Console.ReadLine();
+            string  Str = Console.ReadLine();
             //Создаем массив длиной равное длине строки
             char[] StrArray = new char[Str.Length];
             //Переворачиваем строку и записываем в созданный массив
