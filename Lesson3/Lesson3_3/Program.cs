@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 /*Домашнее задание 
  * Написать программу, 
@@ -14,6 +15,8 @@ namespace Lesson3_3
             string  Str = Console.ReadLine();
             //Создаем массив длиной равное длине строки
             char[] StrArray = new char[Str.Length];
+            //Первый способ
+            Console.WriteLine("Первый способ");
             //Переворачиваем строку и записываем в созданный массив
             for (int i = Str.Length - 1; i >=0; i--) 
             {
@@ -24,6 +27,10 @@ namespace Lesson3_3
             {
                 Console.Write($"{StrArray[i]}");
             }
+            //Второй способ
+            Console.WriteLine();
+            Console.WriteLine("Второй способ");
+            Console.WriteLine(new string(Str.Reverse().ToArray()));
         }
     }
 }
