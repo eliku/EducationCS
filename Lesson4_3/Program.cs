@@ -30,44 +30,38 @@ namespace Lesson4_3
         static void Main(string[] args)
         {
             Console.WriteLine("Введите номер месяца");
-            Console.WriteLine(SelectSeason(Convert.ToInt32(Console.ReadLine(), true)));
+            Console.WriteLine(SelectSeason(Convert.ToInt32(Console.ReadLine()), true));
+            Console.WriteLine("Введите номер месяца");
+            Console.WriteLine(SelectSeason(Convert.ToInt32(Console.ReadLine()), false));
         }
-        public static string SelectSeason(int Month, bool language)
+         static string SelectSeason(int Month, bool language)
         {
             switch (Month) 
             {
                 case 12:
                 case 1:
                 case 2:
-                    if (language)
-                    {
-                        return (Seasons_eng.Winter).ToString();
-                    }
-                    else {
-                        return (Seasons_rus.зима).ToString();
-                    }
-                    break;
+                    if (language) return (Seasons_eng.Winter).ToString();
+                    else          return (Seasons_rus.зима).ToString();
+
                 case 3:
                 case 4:
                 case 5:
-                    return (Seasons_eng.Spring).ToString();
-                    break;
+                    if (language) return (Seasons_eng.Spring).ToString();
+                    else          return (Seasons_rus.весна).ToString();
                 case 6:
                 case 7:
                 case 8:
-                    return (Seasons_eng.Summer).ToString();
-                    break;
+                    if (language) return (Seasons_eng.Summer).ToString();
+                    else          return (Seasons_rus.лето).ToString();
                 case 9:
                 case 10:
                 case 11:
-                    return (Seasons_eng.Autumn).ToString();
-                    break;
+                    if (language) return (Seasons_eng.Autumn).ToString();
+                    else          return (Seasons_rus.осень).ToString();
                 default:
                     return "Ошибка: введите число от 1 до 12.";
-                    break;
-
             }
-            return "lkjnl";
         }
 
     }
