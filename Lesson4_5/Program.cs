@@ -8,21 +8,45 @@ namespace Lesson4_5
 {
     class Program
     {
-        static void Main(string[] args)
+        static public void GetArray(string Str, out int[] myArray)
         {
-            Console.WriteLine("Введите числа первого массива через пробел");
-            string[] subs =(Console.ReadLine()).Split(' ');
-            int[] ArrayOne = new int[subs.Length];
-
-            Console.WriteLine("Введите числа второго массива через пробел");
-            subs = (Console.ReadLine()).Split(' ');
-            int[] ArrayTwo = new int[subs.Length];
-            //сортировка массива
-            int[] AllArray = ArrayOne.Concat(ArrayTwo).ToArray();
-            Array.Sort(AllArray);
-
-
-            
+            string[] subs = Str.Split(' ');
+            myArray = new int[subs.Length];
+            for (int i = 0; i < subs.Length; i++)
+            {
+                myArray[i] = Convert.ToInt32(subs[i]);
+            }
         }
+        static public void Main(string[] args)      
+        {
+            //Инициализация массивов
+            int[] ArrayOne, ArrayTwo, NewArray;
+            double Mediana = 0;
+
+            //ввод массивов
+            Console.WriteLine("Введите первый массив чисел через пробел");
+            GetArray(Console.ReadLine(), out ArrayOne);
+            Console.WriteLine("Введите второй массив чисел через пробел");
+            GetArray(Console.ReadLine(), out ArrayTwo);
+            //Объединение массивов и сортировка
+            NewArray = ArrayOne.Concat(ArrayTwo).ToArray();
+            Array.Sort(NewArray);
+
+            int index = NewArray.Length / 2;
+
+            if (NewArray.Length % 2 == 0)
+            {
+                
+                Mediana = (NewArray[index - 1] + NewArray[index]) / 2.0;
+            }
+            else {
+                Mediana = NewArray[index];
+            }
+
+            Console.WriteLine($"Медиана равна {Mediana}");
+
+        }
+
+
     }
 }
