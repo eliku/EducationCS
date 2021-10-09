@@ -9,18 +9,27 @@ namespace Lesson5_4
 {
     class Program
     {
+
+        public static void Getsubdirectory(string Dir, string name)
+        {
+            if (Directory.Exists(Dir))
+            {
+                string[] dirs = Directory.GetDirectories(Dir);
+                File.AppendAllLines(name, dirs);
+            }
+        }
         static void Main(string[] args)
         {
-            string workDir = @"C:\Program Files (x86)\Microsoft.NET";
-
-            // Перечень всех файлов и папок, вложенных в workDir
-            string[] entries = Directory.GetFileSystemEntries(workDir, "*", SearchOption.AllDirectories);
-
-            for (int i = 0; i < entries.Length; i++)
+            string dirName = @"L:\Education\EducationCS\Lesson5\Lesson5_4\bin\Debug\net5.0";
+            int count = 0;
+            for (int i = 0; i < dirName.Length; i++) 
             {
-                Console.WriteLine(entries[i]);
+                if (dirName[i] == '\\') count++;
             }
 
+            var word = dirName.Split('\\');
+
+            //Getsubdirectory(words, "Text.txt");
         }
     }
 }
