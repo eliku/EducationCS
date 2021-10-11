@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 /* Домашнее задание
  * Список задач (ToDo-list):
  * написать приложение для ввода списка задач;
@@ -15,9 +18,20 @@ namespace Lesson5_5
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int i;
+            Console.WriteLine("Введите Title и IsDone");
+            ToDolist.Write(Console.ReadLine(), Console.ReadLine(), @"serializ.txt");
+
+            string[] lines = File.ReadAllLines(@"serializ.txt");
+            i = 0; 
+            foreach (string s in lines)
+            {
+                i++;
+                Console.WriteLine($"{i}. {s}");
+            }
         }
     }
 }
