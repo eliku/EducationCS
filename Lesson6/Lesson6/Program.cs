@@ -21,8 +21,23 @@ namespace Lesson6
                 Console.WriteLine($"ID: {outProcess.Id}  Name: {outProcess.ProcessName}");
             }
 
-            Console.WriteLine()
+            Console.WriteLine("Введите ID или имени процесса");
+            //ввод имени или ID процесса
+            string IDorName = Console.ReadLine();
 
+            foreach (Process outProcess in listprosecc)
+            {
+                // выводим id и имя процесса
+                if (outProcess.ProcessName == IDorName) 
+                {
+                    outProcess.Kill();
+                }
+
+                if (outProcess.Id == Convert.ToInt32(IDorName)) 
+                {
+                    outProcess.Kill();
+                }
+            }
         }
     }
 }
