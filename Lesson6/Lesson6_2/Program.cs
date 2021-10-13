@@ -12,7 +12,7 @@ namespace Lesson6_2
 
             for (int i = 0; i < NumArray.Length; i++)
             { 
-                NumArray[i] = rand.Next(-1, 1);
+                NumArray[i] = rand.Next(-5, 5);
                 Console.Write(NumArray[i]);
             }
 
