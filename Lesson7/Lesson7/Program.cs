@@ -6,7 +6,7 @@ namespace Lesson7
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Сумма двух чисел");
+            Console.WriteLine($"Сумма чисел {Convert.ToInt32(Console.ReadLine()) + Convert.ToInt32(Console.ReadLine())}");
         }
     }
 }
