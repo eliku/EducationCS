@@ -12,7 +12,7 @@ namespace Lesson8
                 var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 var settings = configFile.AppSettings.Settings;
                 
-
+                //имя
                 if (settings["UserName"] == null)
                 {
                     settings.Add("UserName", "Лена");
