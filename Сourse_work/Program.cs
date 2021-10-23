@@ -18,6 +18,7 @@ namespace Сourse_work
             //
             string dirName;
             //
+
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
 
