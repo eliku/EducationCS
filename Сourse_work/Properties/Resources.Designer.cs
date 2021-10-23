@@ -59,5 +59,14 @@ namespace Сourse_work.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C:\\.
+        /// </summary>
+        internal static string Direction {
+            get {
+                return ResourceManager.GetString("Direction", resourceCulture);
+            }
+        }
     }
 }

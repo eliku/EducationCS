@@ -15,19 +15,21 @@ namespace Сourse_work
             int PositionCursore = 1;
             //количество файлов
             int FileCnt=0;
-            //
             string dirName;
-            //
-
+            //сохранение конфигурации
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
 
             if (settings["Direction"] == null)
             {
-                settings.Add("UserName", "C:\\");
+                settings.Add("Direction", "C:\\");
                 //Вывод подкаталогов
                 dirName = "C:\\";
             }
+            else {
+                dirName = settings["Direction"].Value;
+            }
+            dirName = "C:\\";
             //название проекта
             Console.Title = "Курсовая работа \"Файловый менеджер\"";
             //размер консоли по всему экрану
@@ -117,10 +119,30 @@ namespace Сourse_work
                         if (PositionCursore != 0)
                         {
                             dirName = dirName + listCatalog[PositionCursore - 1];
+                            //очищение конфигурации
+                            settings.Remove("Direction");
+                            //сохранение новых конфигураций
+                            settings.Add("Direction", dirName); 
                             OutConcole(dirName, ref FileCnt, ref listCatalog, ref PositionCursore);
+                            configFile.Save(ConfigurationSaveMode.Modified);
+                            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
                         }
-                        else { 
-                        
+                        else {
+                            for (int i = settings["Direction"].Value.Length - 2; i > 0; i--)
+                            {
+                                if (settings["Direction"].Value[i] == '\\')
+                                {
+                                    dirName = settings["Direction"].Value.Substring(0, i + 1);
+                                    //очищение конфигурации
+                                    settings.Remove("Direction");
+                                    //сохранение новых конфигураций
+                                    settings.Add("Direction", dirName);
+                                    OutConcole(dirName, ref FileCnt, ref listCatalog, ref PositionCursore);
+                                    configFile.Save(ConfigurationSaveMode.Modified);
+                                    ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+                                    break;
+                                }
+                            }
                         }
                         break;
                 }
@@ -192,6 +214,8 @@ namespace Сourse_work
 
         public static void OutConcole(string DirName, ref int FileCnt, ref List<string> listCatalog, ref int PositionCursore)
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.Clear();
             //прорисовка экрана
             Console.WriteLine($"{new string('=', Console.LargestWindowWidth - 2)}");
             Console.SetCursorPosition(0, 1);
@@ -202,6 +226,7 @@ namespace Сourse_work
 
             //Вывод подкаталогов
             FileCnt = OutDirectory(DirName, ref listCatalog);
+
             var directory = new DirectoryInfo(DirName);
             //Вывод информации
             if (directory.Exists) // Если указанная директория существует, то выводим о ней информацию.
