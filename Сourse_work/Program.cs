@@ -68,13 +68,13 @@ namespace Сourse_work
                                 if (PositionCursore == 0) Console.WriteLine("...");
                                 else                      Console.WriteLine(listCatalog[PositionCursore - 1]);
 
-                                if (PositionCursore != 0)
+                                if (PositionCursore != 0 && PositionCursore <= listCatalog.Count - FileCnt)
                                 {
                                     directory = new DirectoryInfo(dirName + listCatalog[PositionCursore - 1]);
                                     //Вывод информации
                                     OutInfoDirectory(directory);
                                 }
-
+                                if (PositionCursore > listCatalog.Count - FileCnt) OutInfoFile(dirName + listCatalog[PositionCursore - 1]);
                             }
                             break;
 
@@ -94,12 +94,13 @@ namespace Сourse_work
                                 Console.BackgroundColor = ConsoleColor.Gray;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 Console.WriteLine(listCatalog[PositionCursore - 1]);
-                                if (PositionCursore != 0)
+                                if (PositionCursore != 0 && PositionCursore <= listCatalog.Count - FileCnt)
                                 {
                                     directory = new DirectoryInfo(dirName + listCatalog[PositionCursore - 1]);
                                     //Вывод информации
                                     OutInfoDirectory(directory);
                                 }
+                                if (PositionCursore > listCatalog.Count - FileCnt) OutInfoFile(dirName + listCatalog[PositionCursore - 1]);
                             }
 
                             break;
@@ -153,6 +154,21 @@ namespace Сourse_work
                 Console.WriteLine($"Имя {dirName.FullName}                                                   ");
                 Console.SetCursorPosition(3, Console.LargestWindowHeight - 13);
                 Console.WriteLine($"Время создания {dirName.CreationTime}                                    ");
+            }
+        }
+        public static void OutInfoFile(string path)
+        {
+            FileInfo fileInf = new FileInfo(path);
+            if (fileInf.Exists)
+            {
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.SetCursorPosition(3, Console.LargestWindowHeight - 14);
+                Console.WriteLine($"Имя файла: {fileInf.Name}                                                 ");
+                Console.SetCursorPosition(3, Console.LargestWindowHeight - 13);
+                Console.WriteLine($"Время создания: {fileInf.CreationTime}                                    ");
+                Console.SetCursorPosition(3, Console.LargestWindowHeight - 12);
+                Console.WriteLine($"Размер: {fileInf.Length}                                                  ");
             }
         }
     }
