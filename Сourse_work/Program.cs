@@ -29,7 +29,6 @@ namespace Сourse_work
             else {
                 dirName = settings["Direction"].Value;
             }
-            dirName = "C:\\";
             //название проекта
             Console.Title = "Курсовая работа \"Файловый менеджер\"";
             //размер консоли по всему экрану
@@ -144,6 +143,9 @@ namespace Сourse_work
                                 }
                             }
                         }
+                        break;
+                    case ConsoleKey.End:
+                       // Console.
                         break;
                 }
 
