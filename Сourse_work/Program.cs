@@ -3,22 +3,31 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 
 namespace Сourse_work
 {
     class Program
     {
+        static int PositionCursore = 1;
+        //список строк подкаталогов и файлов
+        static List<string> listCatalog = new List<string>();
+        //количество файлов
+        static int FileCnt = 0;
+        static DirectoryInfo directory;
+        static string dirName;
+        static Configuration configFile;
+        static KeyValueConfigurationCollection settings;
+        static int Size = 0;
+        static private object valueLocker = new object();
         public static void Main(string[] args)
         {
-            //список строк подкаталогов и файлов
-            List<string> listCatalog = new List<string>();
-            int PositionCursore = 1;
-            //количество файлов
-            int FileCnt=0;
-            string dirName;
+            //многопоточность
+            Thread myThread = new Thread(new ThreadStart(readLine));
+            Thread myThreadKey = new Thread(new ThreadStart(keyread));
             //сохранение конфигурации
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
+            configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            settings = configFile.AppSettings.Settings;
 
             if (settings["Direction"] == null)
             {
@@ -38,13 +47,12 @@ namespace Сourse_work
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
             Console.OutputEncoding = Encoding.UTF8;
+            Size = Console.LargestWindowHeight;
 
-
-            
             OutConcole(dirName, ref FileCnt, ref listCatalog, ref PositionCursore);
 
             FileCnt = OutDirectory(dirName, ref listCatalog);
-            var directory = new DirectoryInfo(dirName);
+            directory = new DirectoryInfo(dirName);
             //Вывод информации
             if (directory.Exists) // Если указанная директория существует, то выводим о ней информацию.
             {
@@ -54,28 +62,66 @@ namespace Сourse_work
                 Console.WriteLine($"Время создания {directory.CreationTime}");
             }
             // обработка нажатий кнопок
+            myThreadKey.Start();
+            myThread.Start();
             
+
+        }
+
+        public static void readLine()
+        {
+            string name;
+            bool end = true;
+            lock (valueLocker)
+            {
+                Console.SetCursorPosition(3, Size - 1);
+                do
+                {
+                    name = Console.ReadLine();
+                    Console.SetCursorPosition(3, Size - 1);
+
+                    switch (name)
+                    {
+                        case "Help":
+                            Console.WriteLine("Info -Выводит список файлов в каталоге\nCD-Переход в каталог\nDel-Удаление файла по имени\nDelM-Удаление файла по маске\nCrea-Создание файла\nCopy-Копирование файла");
+                            break;
+                        case "Exit":
+                            end = false;
+                            break;
+                        default:
+                            break;
+                    }
+                    OutConcole(dirName, ref FileCnt, ref listCatalog, ref PositionCursore);
+                    Thread.Sleep(50);
+
+                } while (end != false);
+            }
+        }
+
+        public static void keyread()
+        {
             ConsoleKey key = Console.ReadKey().Key;
             while (key != ConsoleKey.Escape)
             {
-                Console.CursorVisible = false;
+                Console.CursorVisible = true;
+                Console.SetCursorPosition(3, PositionCursore);
                 switch (key)
                 {
                     case ConsoleKey.UpArrow://клавиша вверх
-                        { 
+                        {
                             if (PositionCursore > 0)
                             {
                                 Console.SetCursorPosition(3, PositionCursore);
                                 Console.BackgroundColor = ConsoleColor.Blue;
-                                if (PositionCursore<=listCatalog.Count - FileCnt) Console.ForegroundColor = ConsoleColor.White;
-                                else                                              Console.ForegroundColor = ConsoleColor.Black;
+                                if (PositionCursore <= listCatalog.Count - FileCnt) Console.ForegroundColor = ConsoleColor.White;
+                                else Console.ForegroundColor = ConsoleColor.Black;
                                 Console.WriteLine(listCatalog[PositionCursore - 1]);
                                 PositionCursore--;
                                 Console.SetCursorPosition(3, PositionCursore);
                                 Console.BackgroundColor = ConsoleColor.Gray;
                                 Console.ForegroundColor = ConsoleColor.White;
                                 if (PositionCursore == 0) Console.WriteLine("...");
-                                else                      Console.WriteLine(listCatalog[PositionCursore - 1]);
+                                else Console.WriteLine(listCatalog[PositionCursore - 1]);
 
                                 if (PositionCursore != 0 && PositionCursore <= listCatalog.Count - FileCnt)
                                 {
@@ -90,14 +136,14 @@ namespace Сourse_work
                         }
                     case ConsoleKey.DownArrow://клавиша вниз
                         {
-                            if (PositionCursore < Console.LargestWindowHeight - 15 && PositionCursore<listCatalog.Count)
+                            if (PositionCursore < Console.LargestWindowHeight - 15 && PositionCursore < listCatalog.Count)
                             {
                                 Console.SetCursorPosition(3, PositionCursore);
                                 Console.BackgroundColor = ConsoleColor.Blue;
                                 if (PositionCursore <= listCatalog.Count - FileCnt) Console.ForegroundColor = ConsoleColor.White;
                                 else Console.ForegroundColor = ConsoleColor.Black;
                                 if (PositionCursore == 0) Console.WriteLine("...");
-                                else                      Console.WriteLine(listCatalog[PositionCursore - 1]);
+                                else Console.WriteLine(listCatalog[PositionCursore - 1]);
                                 PositionCursore++;
                                 Console.SetCursorPosition(3, PositionCursore);
                                 Console.BackgroundColor = ConsoleColor.Gray;
@@ -121,12 +167,13 @@ namespace Сourse_work
                             //очищение конфигурации
                             settings.Remove("Direction");
                             //сохранение новых конфигураций
-                            settings.Add("Direction", dirName); 
+                            settings.Add("Direction", dirName);
                             OutConcole(dirName, ref FileCnt, ref listCatalog, ref PositionCursore);
                             configFile.Save(ConfigurationSaveMode.Modified);
                             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
                         }
-                        else {
+                        else
+                        {
                             for (int i = settings["Direction"].Value.Length - 2; i > 0; i--)
                             {
                                 if (settings["Direction"].Value[i] == '\\')
@@ -143,16 +190,18 @@ namespace Сourse_work
                                 }
                             }
                         }
+                        Console.SetCursorPosition(3, Size - 1);
                         break;
                     case ConsoleKey.End:
-                       // Console.
+                        // Console.
                         break;
                 }
-
+                Thread.Sleep(50);
                 key = Console.ReadKey().Key;
+                Console.SetCursorPosition(3, Size - 1);
             }
-            Console.ReadLine();
         }
+
 
         //метод вывода подкаталогов и файлов
         public static int OutDirectory(string dirName, ref List<string> list)
@@ -183,6 +232,7 @@ namespace Сourse_work
                     list.Add(s.Replace(dirName, ""));
                 }
             }
+            Console.SetCursorPosition(3, Size-1);
             return FileCnt;
         }
         //метод вывода информации о каталоге
