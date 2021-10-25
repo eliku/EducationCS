@@ -19,7 +19,7 @@ namespace Сourse_work
         static Configuration configFile;
         static KeyValueConfigurationCollection settings;
         static int Size = 0;
-        static object locker = new object();
+
         public static void Main(string[] args)
         {
             Thread primarythread = Thread.CurrentThread;
@@ -79,7 +79,6 @@ namespace Сourse_work
         {
             string name;
             bool end = true;
-
             Console.SetCursorPosition(3, Size - 1);
             do
             {
@@ -99,7 +98,7 @@ namespace Сourse_work
                     OutConcole(dirName, ref FileCnt, ref listCatalog, ref PositionCursore);
                     configFile.Save(ConfigurationSaveMode.Modified);
                     ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-                    continue;
+                    
                 }
                 //удаление файла и каталога
                 if (name.IndexOf("rm") != -1)
@@ -138,12 +137,13 @@ namespace Сourse_work
                 switch (name)
                 {
                     case "Help":
-                        Console.WriteLine("cd -Выводит список файлов в каталоге\ncd-Переход в каталог\nrm-Удаление файла по имени\nDelM-Удаление файла по маске\nCrea-Создание файла\nCopy-Копирование файла");
+                        Console.WriteLine("cd -Выводит список файлов в каталоге\ncd-Переход в каталог\nrm-Удаление файла по имени или каталога\ncp-Копирование файла или каталога");
                         break;
                     case "Exit":
                         end = false;
                         break;
                     default:
+                        //keyread();
                         break;
                 }
             } while (end != false);
@@ -242,7 +242,7 @@ namespace Сourse_work
                             }
                         }
                         break;
-                }
+                }                
                 key = Console.ReadKey().Key;
             }
         }
@@ -333,7 +333,6 @@ namespace Сourse_work
                 Console.SetCursorPosition(3, Console.LargestWindowHeight - 13);
                 Console.WriteLine($"Время создания {directory.CreationTime}");
             }
-
         }
     }
 }
