@@ -119,6 +119,7 @@ namespace Сourse_work
                         }
                         catch (Exception ex)
                         {
+                            Console.SetCursorPosition(3, Size - 1);
                             Console.WriteLine(ex.Message);
                         }
                     }
@@ -155,12 +156,9 @@ namespace Сourse_work
             Thread threadSecond = Thread.CurrentThread;
             ConsoleKey key = Console.ReadKey().Key;
 
-            Console.SetCursorPosition(3, PositionCursore);
-
             while (key != ConsoleKey.Escape)
             {
                 Console.CursorVisible = true;
-                Console.SetCursorPosition(3, PositionCursore);
 
                 switch (key)
                 {
@@ -242,6 +240,9 @@ namespace Сourse_work
                             }
                         }
                         break;
+                    default:
+                        Console.SetCursorPosition(Console.CursorLeft,Size-1);
+                        break;
                 }                
                 key = Console.ReadKey().Key;
             }
@@ -259,22 +260,30 @@ namespace Сourse_work
 
             if (Directory.Exists(dirName))
             {
-                string[] dirs = Directory.GetDirectories(dirName);
-                foreach (string s in dirs)
+                try
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.SetCursorPosition(3, Console.CursorTop);
-                    Console.WriteLine(s.Replace(dirName, ""));
-                    list.Add(s.Replace(dirName, ""));
+                    string[] dirs = Directory.GetDirectories(dirName);
+                    foreach (string s in dirs)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.SetCursorPosition(3, Console.CursorTop);
+                        Console.WriteLine(s.Replace(dirName, ""));
+                        list.Add(s.Replace(dirName, ""));
+                    }
+                    string[] files = Directory.GetFiles(dirName);
+                    FileCnt = files.Length;
+                    foreach (string s in files)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.SetCursorPosition(3, Console.CursorTop);
+                        Console.WriteLine(s.Replace(dirName, ""));
+                        list.Add(s.Replace(dirName, ""));
+                    }
                 }
-                string[] files = Directory.GetFiles(dirName);
-                FileCnt = files.Length;
-                foreach (string s in files)
+                catch (Exception ex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.SetCursorPosition(3, Console.CursorTop);
-                    Console.WriteLine(s.Replace(dirName, ""));
-                    list.Add(s.Replace(dirName, ""));
+                    Console.SetCursorPosition(3, Size - 1);
+                    Console.WriteLine(ex.Message);
                 }
             }
             Console.SetCursorPosition(3, Size-1);
